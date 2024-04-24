@@ -3,13 +3,13 @@ import CategoryList from "./_components/CategoryList";
 
 function layout({children}) {
   return (
-    <div className="grid grid-cols-4">
-      <div className="hidden md:block">
+    <div className="grid grid-cols-1 md:grid-cols-4">
+    <div className="md:col-span-1">
         <CategoryList/>
       </div>
 
       <div className="col-span-3">{children}</div>
-      {children}
+      
     </div>
   );
 }

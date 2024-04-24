@@ -6,11 +6,13 @@ import { Button } from '../../components/ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useAuth } from '../../hooks/useAuth';
 
 
 
 
 function SignIn() {
+  const { login, setUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
@@ -37,7 +39,9 @@ function SignIn() {
 
       const data = await res.json();
       console.log(data);
-      sessionStorage.setItem('user', JSON.stringify(data))
+      login(data);
+      setUser(data);
+      // sessionStorage.setItem('user', JSON.stringify(data))
       toast("Login successfully")
       router.push('/')
     } catch (error) {
