@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useContext } from "react";
+import {  useEffect, useContext } from "react";
 import { Button } from "../components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,13 +11,10 @@ import {
   PopoverTrigger,
 } from "../components/ui/popover";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../hooks/useAuth";
 import { AuthContext } from "../contexts/AuthContext";
 
 function Header() {
-  const { user, logout } = useAuth();
-  // const { user } = useContext(AuthContext);
-  const [isLogin, setIsLogin] = useState(false);
+  const { user, setUser } = useContext(AuthContext);
   const router = useRouter();
   console.log(user);
   useEffect(() => {
@@ -26,9 +23,8 @@ function Header() {
   }, []);
 
   const onSignOut = () => {
-    // sessionStorage.clear();
-    // setIsLogin(false);
-    logout();
+    setUser(null);
+    localStorage.removeItem("user");
     router.push("/sign-in");
   };
 

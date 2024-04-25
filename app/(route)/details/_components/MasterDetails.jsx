@@ -79,9 +79,11 @@ function MasterDetails({ master }) {
               >
                 {procedure.name} - {procedure.price} EUR
               </div>
+              
             ))}
             <BookAppointment />
           </div>
+          <div className="bg-green-700 text-white p-2 mt-2 rounded-lg w-full">{master.description}</div>
         </div>
       )}
     </>
