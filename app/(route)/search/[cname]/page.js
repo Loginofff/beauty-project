@@ -1,7 +1,7 @@
+
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import Link from "next/link";
 
 function Search({ params }) {
@@ -48,38 +48,43 @@ function Search({ params }) {
     setLoading(false);
   };
 
-  const MasterCard = ({ master }) => (
-<div className="border-[1px] rounded-lg p-3
-               cursor-pointer hover:border-green-700 hover:shadow-sm 
-               transition-all ease-in-out mt-5">
-    <div className=" items-baseline flex flex-col">
-        <div className="flex justify-between items-center">
+  const MasterCard = ({ master }) => {
+    const categoryNames = master.categoryIds.map(categoryId => {
+      const category = categories.find(cat => cat.id === categoryId);
+      return category ? category.name : null;
+    });
+
+    return (
+      <div className="border-[1px] rounded-lg p-3 cursor-pointer hover:border-green-700 hover:shadow-sm transition-all ease-in-out mt-5">
+        <div className="items-baseline flex flex-col">
+          <div className="flex justify-between items-center">
+
+          <img src={master.profileImageUrl} alt="searchPhoto"
+              className="rounded-full w-20 h-20 mr-10 " />
+
             <div>
-                <h2 className="font-bold">
-                    {master.firstName} {master.lastName}
-                </h2>
-                <h2 className="text-gray-500 text-sm">Address: {master.address}</h2>
-                <p className="text-[15px] bg-green-900 p-2 rounded-full px-2 text-white">
-                    Categories:{" "}
-                    {master.categories.map((category) => category.name).join(", ")}
-                </p>
+              <h2 className="font-bold ml-2">
+                {master.firstName} {master.lastName}
+              </h2>
+
+              <h2 className="text-gray-500 text-sm ml-2 mt-1">Address: {master.address}</h2>
+              <p className="text-[15px] text-center bg-green-900 p-2 rounded-full mt-2 text-white">
+                {categoryNames.join(", ")}
+              </p>
             </div>
+
             <div className="ml-36">
-                <Link href={`/details/${master.id}`}>
-                    <button className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
-                        Booking Jetzt
-                    </button>
-                </Link>
+              <Link href={`/details/${master.id}`}>
+                <button className="p-2 px-3 border-[1px] border-green-700 text-green-700 rounded-full text-center cursor-pointer hover:bg-green-700 hover:text-white">
+                  Booking Jetzt
+                </button>
+              </Link>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-
-
-
-    
-    
-  );
+      </div>
+    );
+  };
 
   return (
     <div>

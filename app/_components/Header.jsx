@@ -24,7 +24,7 @@ function Header() {
 
   const onSignOut = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     router.push("/sign-in");
   };
 
